@@ -44,7 +44,19 @@ jobs:
           path: dist
 
   deploy:
+    name: Deploy the app
+    needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - run: echo "To be implementsed"
+      - name: Download artifact
+        uses: actions/download-artifact@main
+        with:
+          name: build
+          path: dist
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting --project intercontinental-tic-tac-toe   
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+
