@@ -34,7 +34,7 @@ export function calculateWinner(gameState) {
     }
   }
   if (gameState.indexOf('') === -1) {
-    return 'No one';
+    return 'Noone';
   }
   return null;
 }
